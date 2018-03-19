@@ -9,8 +9,14 @@ public:
 	~graph();
 
 	void addVertex(std::string name);
-	void connect(std::string nameFirst, std::string nameSecod); // Will create edge between vertex nameFirst and nameSecond, but nameSecond to nameFirst will be not connected.
+	void connect(std::string nameFirst, std::string nameSecod); // Will create not directed edge between vertex nameFirst and nameSecond.
 	void printMatrix();
+	int graphOrder();
+	int graphSize(); // Return number of edges
+	int vertexDegree(std::string name);
+	bool isComplete();
+
+	void DFS(std::string name);
 
 private:
 	struct vertex
@@ -36,4 +42,8 @@ private:
 		}
 		return -1;
 	}
+
+#pragma region algorithms
+	void depthFirstSearch(int v);
+#pragma endregion 
 };

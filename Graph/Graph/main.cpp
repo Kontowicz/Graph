@@ -18,6 +18,6 @@ int main()
 	g.connect("2", "3");
 
 
-	g.printMatrix();
+	g.DFS("1");
 	return EXIT_SUCCESS;
 }
