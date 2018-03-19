@@ -1,6 +1,7 @@
 #include "graph.h"
 #include <iostream>
 #include <iomanip>
+#include <list>
 
 
 graph::graph()
@@ -26,7 +27,7 @@ void graph::connect(std::string nameFirst, std::string nameSecod)
 	if (f != -1 && s != -1) 
 	{
 		vertexInGraph[f].addEdge(s);
-		vertexInGraph[s].addEdge(f);
+		//vertexInGraph[s].addEdge(f);
 	}
 	else
 	{
@@ -86,11 +87,38 @@ bool graph::isComplete()
 
 void graph::DFS(std::string name)
 {
-	for (auto vertex : vertexInGraph)
+	resetVisited();
+	int pos = findVertex(name);
+	if (pos != -1)
+		depthFirstSearch(findVertex(name));
+	else
+		std::cout << "Error in DFS!\n";
+}
+
+void graph::BFS(std::string name)
+{
+	resetVisited();
+
+}
+
+void graph::transposition()
+{
+	saveAsMatrix();
+	std::vector<std::vector<bool>> tr;
+	tr.resize(matrix.size());
+	for (int i =0; i<matrix.size(); i++)
 	{
-		vertex.visited = false;
+		tr[i].resize(matrix.size());
 	}
-	depthFirstSearch(findVertex(name));
+
+	for(int i = 0; i<matrix.size(); i++)
+	{
+		for(int j=0; j<matrix.size(); j++)
+		{
+			tr[j][i] = matrix[i][j];
+		}
+	}
+	matrix = tr;
 }
 
 
@@ -131,5 +159,34 @@ void graph::depthFirstSearch(int v)
 	{
 		if (!vertexInGraph[vertexInGraph[v].edges[i]].visited)
 			depthFirstSearch(vertexInGraph[v].edges[i]);
+	}
+}
+
+void graph::breadthFirstSearch(int v)
+{
+	std::list<int> queue;
+	vertexInGraph[v].visited = true;
+	queue.push_back(v);
+	while (!queue.empty())
+	{
+		v = queue.front();
+		std::cout << v << " ";
+		queue.pop_front();
+		for (int i = 0; i != vertexInGraph[v].edges.size(); ++i)
+		{
+			if(!vertexInGraph[vertexInGraph[v].edges[i]].visited)
+			{
+				vertexInGraph[vertexInGraph[v].edges[i]].visited = true;
+				queue.push_back(i);
+			}
+		}
+	}
+}
+
+void graph::resetVisited()
+{
+	for (auto vertex : vertexInGraph)
+	{
+		vertex.visited = false;
 	}
 }

@@ -3,8 +3,6 @@ e:\repos\c++\graph\graph\graph\graph.h(38): warning C4244: "argument": konwersja
 e:\repos\c++\graph\graph\graph\graph.h(40): warning C4244: "return": konwersja z "uint64_t" do "int", możliwa utrata danych
 e:\repos\c++\graph\graph\graph\graph.cpp(28): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
 e:\repos\c++\graph\graph\graph\graph.cpp(28): warning C4244: "argument": konwersja z "uint64_t" do "int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(29): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(29): warning C4244: "argument": konwersja z "uint64_t" do "int", możliwa utrata danych
 e:\repos\c++\graph\graph\graph\graph.cpp(42): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
 e:\repos\c++\graph\graph\graph\graph.cpp(50): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
 e:\repos\c++\graph\graph\graph\graph.cpp(114): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
@@ -12,5 +10,9 @@ e:\repos\c++\graph\graph\graph\graph.cpp(119): warning C4244: "argument": konwer
 e:\repos\c++\graph\graph\graph\graph.cpp(121): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
 e:\repos\c++\graph\graph\graph\graph.cpp(132): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
 e:\repos\c++\graph\graph\graph\graph.cpp(133): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+  main.cpp
+e:\repos\c++\graph\graph\graph\graph.h(38): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.h(40): warning C4244: "return": konwersja z "uint64_t" do "int", możliwa utrata danych
+  Generowanie kodu...
 e:\repos\c++\graph\graph\graph\graph.cpp(80): warning C4715: "graph::vertexDegree”: niewszystkie ścieżki kodu zwracają wartość
   Graph.vcxproj -> E:\Repos\C++\Graph\Graph\Debug\Graph.exe
