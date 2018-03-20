@@ -19,7 +19,7 @@ public:
 	void DFS(std::string name);
 	void BFS(std::string name);
 	void transposition();
-
+	void graphSquare();
 private:
 	struct vertex
 	{
@@ -49,5 +49,6 @@ private:
 	void depthFirstSearch(int v);
 	void breadthFirstSearch(int v);
 	void resetVisited();
+	void buildNewGraph(); // Make new graph repesentation from matrix
 #pragma endregion 
 };

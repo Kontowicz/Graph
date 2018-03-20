@@ -119,6 +119,34 @@ void graph::transposition()
 		}
 	}
 	matrix = tr;
+	buildNewGraph();
+}
+
+void graph::graphSquare()
+{
+	saveAsMatrix();
+	int r = matrix.size();
+	std::vector<std::vector<bool>> matrixS;
+	matrixS.resize(r);
+
+	for (int i=0; i<r; i++)
+		matrixS[i].resize(r);
+	
+	for (int i = 0; i < r; i++)
+	{
+		for (int j = 0; j < r; j++) 
+			matrixS[i][j] = matrix[i][j];
+
+		for (int j = 0; j < r; j++) {
+			if ((i != j) && matrix[i][j]) {
+				for (int k = 0; k < r; k++)
+					if (matrix[j][k]) matrixS[i][k] = 1;
+			}
+		}
+	}
+
+	matrix = matrixS;
+	buildNewGraph();
 }
 
 
@@ -188,5 +216,20 @@ void graph::resetVisited()
 	for (auto vertex : vertexInGraph)
 	{
 		vertex.visited = false;
+	}
+}
+
+void graph::buildNewGraph()
+{
+	for(int i=0; i<matrix.size(); i++)
+	{
+		vertexInGraph[i].edges.clear();
+		for(int j=0; j<matrix.size(); j++)
+		{
+			if(matrix[i][j])
+			{
+				vertexInGraph[i].edges.push_back(j);
+			}
+		}
 	}
 }
