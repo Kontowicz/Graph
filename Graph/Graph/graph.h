@@ -20,6 +20,7 @@ public:
 	void BFS(std::string name);
 	void transposition();
 	void graphSquare();
+	void lineGraph();
 private:
 	struct vertex
 	{
@@ -45,10 +46,8 @@ private:
 		return -1;
 	}
 
-#pragma region algorithms
 	void depthFirstSearch(int v);
 	void breadthFirstSearch(int v);
 	void resetVisited();
 	void buildNewGraph(); // Make new graph repesentation from matrix
-#pragma endregion 
 };

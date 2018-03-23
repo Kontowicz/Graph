@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <list>
+#include <map>
 
 
 graph::graph()
@@ -147,6 +148,42 @@ void graph::graphSquare()
 
 	matrix = matrixS;
 	buildNewGraph();
+}
+
+void graph::lineGraph()
+{
+	std::vector<std::vector<int>> wy;
+	
+	struct po
+	{
+		int i;
+		int j;
+
+		po(int a, int b)
+		{
+			i = a;
+			j = b;
+		}
+	};
+
+	std::vector<po> w;
+
+	saveAsMatrix();
+	for(int i=0; i<matrix.size(); i++)
+	{
+		for(int j=0; j<i; j++)
+		{
+			if(matrix[i][j]==1)
+			{
+				w.emplace_back(i, j);
+			}
+		}
+	}
+
+	for (auto value : w)
+	{
+		std::cout << value.i << "  " << value.j << "\n";
+	}
 }
 
 
