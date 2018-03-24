@@ -165,24 +165,66 @@ void graph::lineGraph()
 			j = b;
 		}
 	};
-
+	saveAsMatrix();
 	std::vector<po> w;
 
-	saveAsMatrix();
 	for(int i=0; i<matrix.size(); i++)
 	{
-		for(int j=0; j<i; j++)
+		for (int j = 0; j < i; j++)
 		{
-			if(matrix[i][j]==1)
+			if (matrix[i][j] == 1)
 			{
-				w.emplace_back(i, j);
+				w.emplace_back(j, i);
 			}
 		}
 	}
 
+	std::vector<std::vector<po>> wierz;
+	wierz.resize(w.size());
+
+	int i = 0;
 	for (auto value : w)
 	{
-		std::cout << value.i << "  " << value.j << "\n";
+		for (auto edge : vertexInGraph[value.i].edges)
+		{
+			if (edge != value.j && value.i != edge)
+			{
+				if (edge>value.i)
+				{
+					wierz[i].emplace_back(value.i, edge);
+				}
+				else
+				{
+					wierz[i].emplace_back(edge, value.i);
+				}
+			}
+		}
+		for (auto edge : vertexInGraph[value.j].edges)
+		{
+			if(edge!=value.j && value.i!=edge)
+			{
+				if(edge>value.j)
+				{
+					wierz[i].emplace_back(value.j, edge);
+				}
+				else
+				{
+					wierz[i].emplace_back(edge, value.j);
+				}
+			}
+				
+		}
+		i++;
+	}
+
+	for(int i=0; i<w.size(); i++)
+	{
+		std::cout << w[i].i << "-" << w[i].j << "  ";
+		for (auto is : wierz[i])
+		{
+			std::cout << is.i<<"-"<<is.j << "  ";
+		}
+		std::cout << "\n";
 	}
 }
 
