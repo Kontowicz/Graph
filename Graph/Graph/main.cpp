@@ -36,5 +36,6 @@ int main()
 	g.connect("5", "3");
 	g.connect("5", "4");
 	g.lineGraph();
+	g.printMatrix();
 	return EXIT_SUCCESS;
 }

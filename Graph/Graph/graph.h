@@ -8,19 +8,21 @@ public:
 	graph();
 	~graph();
 
-	void addVertex(std::string name);
+	void addVertex(std::string name); // Add new vertex to graph.
 	void connect(std::string nameFirst, std::string nameSecod); // Will create directed edge between vertex nameFirst and nameSecond.
-	void printMatrix();
-	int graphOrder();
-	int graphSize(); // Return number of edges
-	int vertexDegree(std::string name);
-	bool isComplete();
+	void printMatrix(); // Print graph as matrix.
+	int graphOrder(); // Return ammoun of vertex in graph.
+	int graphSize(); // Return number of edges.
+	int vertexDegree(std::string name); // Return degree of vertex with name=name.
+	bool isComplete(); // Check graph complete.
 
-	void DFS(std::string name);
-	void BFS(std::string name);
-	void transposition();
-	void graphSquare();
-	void lineGraph();
+	int graphDegree(); // Return max degree of vertex.
+
+	std::vector<int> DFS(std::string name); // DFS algorith, starts fom vertex name.
+	std::vector<int> BFS(std::string name); // BFS algorith, starts fom vertex name.
+	void transposition(); // Make graph transposition.
+	void graphSquare(); // Make square of graph.
+	void lineGraph(); // Make new line graph.
 private:
 	struct vertex
 	{
@@ -31,10 +33,10 @@ private:
 		vertex(std::string name);
 		void addEdge(int num);
 	};
-	std::vector<vertex> vertexInGraph;
-	std::vector<std::vector<bool>> matrix;
-	void saveAsMatrix();
-	int findVertex(std::string name) // Return posistion of vertex with specific name in collection. When vertex is not found return -1.
+	std::vector<vertex> vertexInGraph; // Countainer for graph.
+	std::vector<std::vector<bool>> matrix; // Graph matrix.
+	void saveAsMatrix(); 
+	int findVertex(const std::string& name) // Return posistion of vertex with specific name in collection. When vertex is not found return -1.
 	{
 		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
 		{
@@ -44,10 +46,10 @@ private:
 			}
 		}
 		return -1;
-	}
+	} // Retuns position of vertex in collection vertexInGraph.
 
-	void depthFirstSearch(int v);
-	void breadthFirstSearch(int v);
-	void resetVisited();
-	void buildNewGraph(); // Make new graph repesentation from matrix
+	void depthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
+	void breadthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
+	void resetVisited(); // Set all vivted property of vertex to false.
+	void buildNewGraph(); // Make new graph repesentation from matrix.
 };

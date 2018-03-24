@@ -1,8 +1,6 @@
 #include "graph.h"
 #include <iostream>
-#include <iomanip>
 #include <list>
-#include <map>
 
 
 graph::graph()
@@ -28,7 +26,6 @@ void graph::connect(std::string nameFirst, std::string nameSecod)
 	if (f != -1 && s != -1) 
 	{
 		vertexInGraph[f].addEdge(s);
-		//vertexInGraph[s].addEdge(f);
 	}
 	else
 	{
@@ -54,6 +51,14 @@ void graph::printMatrix()
 			std::cout <<" "<< reference;
 		}
 		std::cout << "\n";
+	}
+
+	std::cout << "Name:\n";
+	int i = 0;
+	for (auto value : vertexInGraph)
+	{
+		std::cout << i << "   " << value.name<<"\n";
+		++i;
 	}
 }
 
@@ -86,20 +91,46 @@ bool graph::isComplete()
 	return graphSize() == ((vertexInGraph.size()*(vertexInGraph.size()-1))/(2));
 }
 
-void graph::DFS(std::string name)
+int graph::graphDegree()
+{
+	int toReturn = 0;
+	for (auto vertex : vertexInGraph)
+	{
+		if(toReturn<vertex.edges.size())
+		{
+			toReturn = vertex.edges.size();
+		}
+
+		return toReturn;
+	}
+}
+
+std::vector<int> graph::DFS(std::string name)
 {
 	resetVisited();
+	std::vector<int> toReturn;
 	int pos = findVertex(name);
 	if (pos != -1)
-		depthFirstSearch(findVertex(name));
+	{
+		depthFirstSearch(findVertex(name), toReturn);
+		return  toReturn;
+	}		
 	else
 		std::cout << "Error in DFS!\n";
 }
 
-void graph::BFS(std::string name)
+std::vector<int> graph::BFS(std::string name)
 {
 	resetVisited();
-
+	std::vector<int> toReturn;
+	int pos = findVertex(name);
+	if (pos != -1)
+	{
+		breadthFirstSearch(findVertex(name), toReturn);
+		return  toReturn;
+	}
+	else
+		std::cout << "Error in DFS!\n";
 }
 
 void graph::transposition()
@@ -151,10 +182,8 @@ void graph::graphSquare()
 }
 
 void graph::lineGraph()
-{
-	std::vector<std::vector<int>> wy;
-	
-	struct po
+{	
+	struct po // Struct for represent new vertex name.
 	{
 		int i;
 		int j;
@@ -168,7 +197,7 @@ void graph::lineGraph()
 	saveAsMatrix();
 	std::vector<po> w;
 
-	for(int i=0; i<matrix.size(); i++)
+	for(int i=0; i<matrix.size(); i++) // Looking for all connected vertex, edges with vertex are connected will be a new vertex.
 	{
 		for (int j = 0; j < i; j++)
 		{
@@ -179,11 +208,11 @@ void graph::lineGraph()
 		}
 	}
 
-	std::vector<std::vector<po>> wierz;
-	wierz.resize(w.size());
+	std::vector<std::vector<po>> vertex; 
+	vertex.resize(w.size());
 
 	int i = 0;
-	for (auto value : w)
+	for (auto value : w) // Looking for new connections between vertex
 	{
 		for (auto edge : vertexInGraph[value.i].edges)
 		{
@@ -191,11 +220,11 @@ void graph::lineGraph()
 			{
 				if (edge>value.i)
 				{
-					wierz[i].emplace_back(value.i, edge);
+					vertex[i].emplace_back(value.i, edge);
 				}
 				else
 				{
-					wierz[i].emplace_back(edge, value.i);
+					vertex[i].emplace_back(edge, value.i);
 				}
 			}
 		}
@@ -205,11 +234,11 @@ void graph::lineGraph()
 			{
 				if(edge>value.j)
 				{
-					wierz[i].emplace_back(value.j, edge);
+					vertex[i].emplace_back(value.j, edge);
 				}
 				else
 				{
-					wierz[i].emplace_back(edge, value.j);
+					vertex[i].emplace_back(edge, value.j);
 				}
 			}
 				
@@ -217,17 +246,22 @@ void graph::lineGraph()
 		i++;
 	}
 
-	for(int i=0; i<w.size(); i++)
+	vertexInGraph.clear();
+	// Save new graph 
+	for (auto value : w)
 	{
-		std::cout << w[i].i << "-" << w[i].j << "  ";
-		for (auto is : wierz[i])
-		{
-			std::cout << is.i<<"-"<<is.j << "  ";
-		}
-		std::cout << "\n";
+		addVertex(std::to_string(value.i) + "-" + std::to_string(value.j));
 	}
-}
 
+	for (int i = 0; i<w.size(); i++)
+	{
+		for (auto is : vertex[i])
+		{
+			connect(vertexInGraph[i].name,std::to_string(is.i) + "-" +std::to_string(is.j));
+		}	
+	}
+	saveAsMatrix();
+}
 
 graph::vertex::vertex(std::string name)
 {
@@ -258,18 +292,18 @@ void graph::saveAsMatrix()
 	}
 }
 
-void graph::depthFirstSearch(int v)
+void graph::depthFirstSearch(int v, std::vector<int> &wek)
 {
 	vertexInGraph[v].visited = true; 
-	std::cout << std::setw(3) << v;
+	wek.push_back(v);
 	for (uint64_t i = 0; i < vertexInGraph[v].edges.size(); i++)
 	{
 		if (!vertexInGraph[vertexInGraph[v].edges[i]].visited)
-			depthFirstSearch(vertexInGraph[v].edges[i]);
+			depthFirstSearch(vertexInGraph[v].edges[i], wek);
 	}
 }
 
-void graph::breadthFirstSearch(int v)
+void graph::breadthFirstSearch(int v, std::vector<int> &wek)
 {
 	std::list<int> queue;
 	vertexInGraph[v].visited = true;
@@ -277,7 +311,7 @@ void graph::breadthFirstSearch(int v)
 	while (!queue.empty())
 	{
 		v = queue.front();
-		std::cout << v << " ";
+		wek.push_back(v);
 		queue.pop_front();
 		for (int i = 0; i != vertexInGraph[v].edges.size(); ++i)
 		{
