@@ -16,20 +16,20 @@ void graph::addVertex(std::string name)
 	if (findVertex(name) == -1)
 		vertexInGraph.emplace_back(name);
 	else
-		std::cout << "Error!\n";
+		std::cout << "Errorasasssssssssssssssssssssssssss!\n";
 }
 
 void graph::connect(std::string nameFirst, std::string nameSecod)
 {
 	uint64_t f = findVertex(nameFirst);
 	uint64_t s = findVertex(nameSecod);
-	if (f != -1 && s != -1) 
+	if (f != -1 || s != -1) 
 	{
 		vertexInGraph[f].addEdge(s);
 	}
 	else
 	{
-		std::cout << "Error!\n";
+		std::cout << "Errorcon!\n";
 	}
 }
 
@@ -83,7 +83,7 @@ int graph::vertexDegree(std::string name)
 	if (pos != -1)
 		return vertexInGraph[pos].edges.size();
 	else
-		std::cout << "Error!\n";
+		std::cout << "Error assdaasdads!\n";
 }
 
 bool graph::isComplete()
@@ -131,6 +131,14 @@ std::vector<int> graph::BFS(std::string name)
 	}
 	else
 		std::cout << "Error in DFS!\n";
+}
+
+std::vector<int> graph::path(std::string nameStart, std::string nameEnd)
+{
+	resetVisited();
+	std::vector<int> toReturn;
+	pathDFS(findVertex(nameStart), findVertex(nameEnd), toReturn);
+	return toReturn;
 }
 
 void graph::transposition()
@@ -344,5 +352,19 @@ void graph::buildNewGraph()
 				vertexInGraph[i].edges.push_back(j);
 			}
 		}
+	}
+}
+
+void graph::pathDFS(int start, int end, std::vector<int>& path)
+{
+	vertexInGraph[start].visited = true;
+	path.push_back(start);
+	for (uint64_t i = 0; i < vertexInGraph[start].edges.size(); i++)
+	{
+		if (start == end) {
+			return;
+		}
+		if (!vertexInGraph[vertexInGraph[start].edges[i]].visited)
+			pathDFS(vertexInGraph[start].edges[i], end, path);
 	}
 }

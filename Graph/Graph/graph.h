@@ -20,6 +20,7 @@ public:
 
 	std::vector<int> DFS(std::string name); // DFS algorith, starts fom vertex name.
 	std::vector<int> BFS(std::string name); // BFS algorith, starts fom vertex name.
+	std::vector<int> path(std::string nameStart, std::string nameEnd);
 	void transposition(); // Make graph transposition.
 	void graphSquare(); // Make square of graph.
 	void lineGraph(); // Make new line graph.
@@ -52,4 +53,5 @@ private:
 	void breadthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
 	void resetVisited(); // Set all vivted property of vertex to false.
 	void buildNewGraph(); // Make new graph repesentation from matrix.
+	void pathDFS(int start, int end, std::vector<int>&path);
 };
