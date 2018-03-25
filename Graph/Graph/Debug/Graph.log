@@ -1,27 +1,38 @@
 ﻿  graph.cpp
-e:\repos\c++\graph\graph\graph\graph.h(44): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.h(46): warning C4244: "return": konwersja z "uint64_t" do "int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(28): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(28): warning C4244: "argument": konwersja z "uint64_t" do "int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(41): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(49): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(99): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(149): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(154): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(156): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(208): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(264): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(291): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(296): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(298): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(309): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(310): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(345): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(348): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph\graph\graph.cpp(367): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(368): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph\graph\graph.cpp(87): warning C4715: "graph::vertexDegree”: niewszystkie ścieżki kodu zwracają wartość
-e:\repos\c++\graph\graph\graph\graph.cpp(106): warning C4715: "graph::graphDegree”: niewszystkie ścieżki kodu zwracają wartość
-e:\repos\c++\graph\graph\graph\graph.cpp(120): warning C4715: "graph::DFS”: niewszystkie ścieżki kodu zwracają wartość
-e:\repos\c++\graph\graph\graph\graph.cpp(134): warning C4715: "graph::BFS”: niewszystkie ścieżki kodu zwracają wartość
+e:\repos\c++\graph\graph\graph\graph.h(54): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.h(56): warning C4244: "return": konwersja z "uint64_t" do "int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(29): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(29): warning C4244: "argument": konwersja z "uint64_t" do "int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(43): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(43): warning C4244: "argument": konwersja z "uint64_t" do "int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(56): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(64): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(114): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(164): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(169): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(171): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(223): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(279): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(314): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(316): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(350): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(355): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(357): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(364): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(378): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(379): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(414): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(417): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(436): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(437): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.cpp(444): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph\graph\graph.cpp(446): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  main.cpp
+e:\repos\c++\graph\graph\graph\graph.h(54): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
+e:\repos\c++\graph\graph\graph\graph.h(56): warning C4244: "return": konwersja z "uint64_t" do "int", możliwa utrata danych
+  Generowanie kodu...
+e:\repos\c++\graph\graph\graph\graph.cpp(102): warning C4715: "graph::vertexDegree”: niewszystkie ścieżki kodu zwracają wartość
+e:\repos\c++\graph\graph\graph\graph.cpp(121): warning C4715: "graph::graphDegree”: niewszystkie ścieżki kodu zwracają wartość
+e:\repos\c++\graph\graph\graph\graph.cpp(135): warning C4715: "graph::DFS”: niewszystkie ścieżki kodu zwracają wartość
+e:\repos\c++\graph\graph\graph\graph.cpp(149): warning C4715: "graph::BFS”: niewszystkie ścieżki kodu zwracają wartość
   Graph.vcxproj -> E:\Repos\C++\Graph\Graph\Debug\Graph.exe

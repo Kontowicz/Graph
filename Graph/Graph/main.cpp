@@ -12,24 +12,24 @@ int main()
 	g.addVertex("6");
 	g.addVertex("7");
 
-	g.connect("0", "1");
+	g.connectOriented("0", "1");
 
-	g.connect("1", "2");
-	g.connect("1", "3");
+	g.connectOriented("1", "2");
+	g.connectOriented("1", "3");
 
-	g.connect("2", "3");
+	g.connectOriented("2", "3");
 
-	g.connect("3", "4");
-	g.connect("3", "5");
+	g.connectOriented("3", "4");
+	g.connectOriented("3", "5");
 
-	g.connect("4", "5");
+	g.connectOriented("4", "5");
 
-	g.connect("5", "6");
+	g.connectOriented("5", "6");
 
-	g.connect("6", "7");
+	g.connectOriented("6", "7");
 
-	g.connect("7", "0");
-	g.connect("7", "4");
+	g.connectOriented("7", "0");
+	g.connectOriented("7", "4");
 
 	g.path("0","6");
 	g.printMatrix();

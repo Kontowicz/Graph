@@ -1,6 +1,7 @@
 #include "graph.h"
 #include <iostream>
 #include <list>
+#include <algorithm>
 
 
 graph::graph()
@@ -19,13 +20,27 @@ void graph::addVertex(std::string name)
 		std::cout << "Errorasasssssssssssssssssssssssssss!\n";
 }
 
-void graph::connect(std::string nameFirst, std::string nameSecod)
+void graph::connectOriented(std::string nameFirst, std::string nameSecod)
 {
 	uint64_t f = findVertex(nameFirst);
 	uint64_t s = findVertex(nameSecod);
 	if (f != -1 || s != -1) 
 	{
 		vertexInGraph[f].addEdge(s);
+	}
+	else
+	{
+		std::cout << "Errorcon!\n";
+	}
+}
+
+void graph::connectOriented(std::string nameFirst, std::string nameSecod, int weight)
+{
+	uint64_t f = findVertex(nameFirst);
+	uint64_t s = findVertex(nameSecod);
+	if (f != -1 || s != -1)
+	{
+		vertexInGraph[f].addEdge(s, weight);
 	}
 	else
 	{
@@ -265,10 +280,47 @@ void graph::lineGraph()
 	{
 		for (auto is : vertex[i])
 		{
-			connect(vertexInGraph[i].name,std::to_string(is.i) + "-" +std::to_string(is.j));
+			connectOriented(vertexInGraph[i].name,std::to_string(is.i) + "-" +std::to_string(is.j));
 		}	
 	}
 	saveAsMatrix();
+}
+
+bool graph::isConnectedGraph()
+{
+	if (!isOriented()) 
+	{
+		return isConnected();
+	}
+	else
+	{
+		std::vector<vertex> tmp = vertexInGraph;
+		makeUnoriented();
+		bool toReturn = isConnected();
+		vertexInGraph = tmp;
+		return toReturn;
+	}
+}
+
+bool graph::isConnected()
+{
+	std::vector<int> w;
+	breadthFirstSearch(0, w);
+	return (w.size() == vertexInGraph.size()) ? true : false;
+}
+
+void graph::makeUnoriented()
+{
+	for(int i=0; i<vertexInGraph.size(); i++)
+	{
+		for (int j=0; j<vertexInGraph[i].edges.size(); i++)
+		{
+			if(!areVertexConnected(vertexInGraph[i].edges[j],i))
+			{
+				vertexInGraph[vertexInGraph[i].edges[j]].edges.push_back(i);
+			}
+		}
+	}
 }
 
 graph::vertex::vertex(std::string name)
@@ -280,6 +332,13 @@ graph::vertex::vertex(std::string name)
 void graph::vertex::addEdge(int num)
 {
 	edges.push_back(num);
+	weight.push_back(0);
+}
+
+void graph::vertex::addEdge(int num, int distance)
+{
+	edges.push_back(num);
+	weight.push_back(distance);
 }
 
 void graph::saveAsMatrix()
@@ -298,6 +357,16 @@ void graph::saveAsMatrix()
 			matrix[i][vertexInGraph[i].edges[j]] = true;
 		}
 	}
+}
+
+bool graph::areVertexConnected(int vertex, int vertex1)
+{
+	for(int i=0; i<vertexInGraph[vertex].edges.size(); i++)
+	{
+		if(vertexInGraph[vertex].edges[i]==vertex1)
+			return true;
+	}
+	return false;
 }
 
 void graph::depthFirstSearch(int v, std::vector<int> &wek)
@@ -367,4 +436,20 @@ void graph::pathDFS(int start, int end, std::vector<int>& path)
 		if (!vertexInGraph[vertexInGraph[start].edges[i]].visited)
 			pathDFS(vertexInGraph[start].edges[i], end, path);
 	}
+}
+
+bool graph::isOriented()
+{
+	bool toReturn = false;
+	for (int i=0; i<matrix.size(); i++)
+	{
+		for(int j=0; j<matrix.size(); j++)
+		{
+			if(matrix[i][j]!=matrix[j][i])
+			{
+				return true;
+			}
+		}
+	}
+	return false;
 }
