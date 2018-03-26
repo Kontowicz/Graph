@@ -3,35 +3,34 @@
 int main()
 {
 	graph g;
-	g.addVertex("0");
-	g.addVertex("1");
-	g.addVertex("2");
-	g.addVertex("3");
-	g.addVertex("4");
-	g.addVertex("5");
-	g.addVertex("6");
-	g.addVertex("7");
+	for(int i=0; i<17; i++)
+	{
+		g.addVertex(std::to_string(i));
+	}
+	g.connectUnoriented("0", "1");
+	g.connectUnoriented("0", "2");
+	g.connectUnoriented("0", "3");
 
-	g.connectOriented("0", "1");
+	g.connectUnoriented("1", "2");
+	g.connectUnoriented("1", "14");
 
-	g.connectOriented("1", "2");
-	g.connectOriented("1", "3");
+	g.connectUnoriented("14", "13");
+	g.connectUnoriented("14", "16");
+	g.connectUnoriented("13", "16");
 
-	g.connectOriented("2", "3");
+	g.connectUnoriented("7", "6");
+	g.connectUnoriented("6", "8");
+	g.connectUnoriented("6", "5");
+	g.connectUnoriented("9", "5");
 
-	g.connectOriented("3", "4");
-	g.connectOriented("3", "5");
+	g.connectUnoriented("10", "15");
+	g.connectUnoriented("15", "11");
+	g.connectUnoriented("15", "12");
+	g.connectUnoriented("11", "4");
+	g.connectUnoriented("12", "4");
 
-	g.connectOriented("4", "5");
+	g.connectedComponent();
 
-	g.connectOriented("5", "6");
-
-	g.connectOriented("6", "7");
-
-	g.connectOriented("7", "0");
-	g.connectOriented("7", "4");
-
-	g.path("0","6");
 	g.printMatrix();
 	return EXIT_SUCCESS;
 }

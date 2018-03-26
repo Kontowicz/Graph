@@ -9,6 +9,7 @@ public:
 	~graph();
 
 	void addVertex(std::string name); // Add new vertex to graph.
+	void connectUnoriented(std::string nameFirst, std::string nameSecod);
 	void connectOriented(std::string nameFirst, std::string nameSecod); // Will create directed edge between vertex nameFirst and nameSecond.
 	void connectOriented(std::string nameFirst, std::string nameSecod, int weight); // Will create directed edge between vertex nameFirst and nameSecond.
 	void printMatrix(); // Print graph as matrix.
@@ -28,6 +29,8 @@ public:
 
 	bool isConnectedGraph(); // Return true when grapg is connected graph if not return false.
 	
+	void connectedComponent();
+
 private:
 	bool isConnected();
 	void makeUnoriented();
@@ -66,4 +69,6 @@ private:
 	void pathDFS(int start, int end, std::vector<int>&path);
 
 	bool isOriented(); // Function return true when graph is oriented if not return false.
+
+	int firstUnvisited();
 };

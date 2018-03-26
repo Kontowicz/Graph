@@ -20,6 +20,21 @@ void graph::addVertex(std::string name)
 		std::cout << "Errorasasssssssssssssssssssssssssss!\n";
 }
 
+void graph::connectUnoriented(std::string nameFirst, std::string nameSecod)
+{
+	uint64_t f = findVertex(nameFirst);
+	uint64_t s = findVertex(nameSecod);
+	if (f != -1 || s != -1)
+	{
+		vertexInGraph[f].addEdge(s);
+		vertexInGraph[s].addEdge(f);
+	}
+	else
+	{
+		std::cout << "Errorcon!\n";
+	}
+}
+
 void graph::connectOriented(std::string nameFirst, std::string nameSecod)
 {
 	uint64_t f = findVertex(nameFirst);
@@ -302,6 +317,30 @@ bool graph::isConnectedGraph()
 	}
 }
 
+void graph::connectedComponent()
+{
+	std::vector<int> w;
+	int all = 0;
+	int i = 0;
+	resetVisited();
+	while (all<vertexInGraph.size())
+	{
+		w.clear();
+		int p = firstUnvisited();
+		depthFirstSearch(p, w);
+		all += w.size();
+		std::cout << i << ":  ";
+		for (auto value : w)
+		{
+			std::cout << value << " ";
+		}
+		std::cout << "\n";
+		i++;
+	}
+	
+	
+}
+
 bool graph::isConnected()
 {
 	std::vector<int> w;
@@ -452,4 +491,14 @@ bool graph::isOriented()
 		}
 	}
 	return false;
+}
+
+int graph::firstUnvisited()
+{
+	
+	for(int i=0; i<vertexInGraph.size(); i++)
+	{
+		if (vertexInGraph[i].visited == false)
+			return i;
+	}
 }
