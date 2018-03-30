@@ -1,7 +1,7 @@
 #include "graph.h"
 #include <iostream>
 #include <list>
-#include <algorithm>
+#include <iomanip>
 
 
 graph::graph()
@@ -17,7 +17,7 @@ void graph::addVertex(std::string name)
 	if (findVertex(name) == -1)
 		vertexInGraph.emplace_back(name);
 	else
-		std::cout << "Errorasasssssssssssssssssssssssssss!\n";
+		std::cout << "Error!\n";
 }
 
 void graph::connectUnoriented(std::string nameFirst, std::string nameSecod)
@@ -31,7 +31,22 @@ void graph::connectUnoriented(std::string nameFirst, std::string nameSecod)
 	}
 	else
 	{
-		std::cout << "Errorcon!\n";
+		std::cout << "Error!\n";
+	}
+}
+
+void graph::connectUnoriented(std::string nameFirst, std::string nameSecod, int weight)
+{
+	uint64_t f = findVertex(nameFirst);
+	uint64_t s = findVertex(nameSecod);
+	if (f != -1 || s != -1)
+	{
+		vertexInGraph[f].addEdge(s,weight);
+		vertexInGraph[s].addEdge(f, weight);
+	}
+	else
+	{
+		std::cout << "Error!\n";
 	}
 }
 
@@ -45,7 +60,7 @@ void graph::connectOriented(std::string nameFirst, std::string nameSecod)
 	}
 	else
 	{
-		std::cout << "Errorcon!\n";
+		std::cout << "Error!\n";
 	}
 }
 
@@ -59,7 +74,7 @@ void graph::connectOriented(std::string nameFirst, std::string nameSecod, int we
 	}
 	else
 	{
-		std::cout << "Errorcon!\n";
+		std::cout << "Error!\n";
 	}
 }
 
@@ -113,7 +128,7 @@ int graph::vertexDegree(std::string name)
 	if (pos != -1)
 		return vertexInGraph[pos].edges.size();
 	else
-		std::cout << "Error assdaasdads!\n";
+		std::cout << "Error!\n";
 }
 
 bool graph::isComplete()
@@ -160,7 +175,7 @@ std::vector<int> graph::BFS(std::string name)
 		return  toReturn;
 	}
 	else
-		std::cout << "Error in DFS!\n";
+		std::cout << "Error in BFS!\n";
 }
 
 std::vector<int> graph::path(std::string nameStart, std::string nameEnd)
@@ -341,18 +356,28 @@ void graph::connectedComponent()
 	
 }
 
+std::vector<std::vector<int>> graph::depthFirstSpanningTree()
+{
+	resetVisited();
+	std::vector<std::vector<int>> we;
+	we.resize(vertexInGraph.size());
+	stp(0, we);
+	
+	return we;
+}
+
 bool graph::isConnected()
 {
 	std::vector<int> w;
 	breadthFirstSearch(0, w);
-	return (w.size() == vertexInGraph.size()) ? true : false;
+	return w.size() == vertexInGraph.size();
 }
 
 void graph::makeUnoriented()
 {
 	for(int i=0; i<vertexInGraph.size(); i++)
 	{
-		for (int j=0; j<vertexInGraph[i].edges.size(); i++)
+		for (int j=0; j<vertexInGraph[i].edges.size(); j++)
 		{
 			if(!areVertexConnected(vertexInGraph[i].edges[j],i))
 			{
@@ -498,7 +523,22 @@ int graph::firstUnvisited()
 	
 	for(int i=0; i<vertexInGraph.size(); i++)
 	{
-		if (vertexInGraph[i].visited == false)
+		if (!vertexInGraph[i].visited)
 			return i;
+	}
+	return -1;
+}
+
+void graph::stp(int v, std::vector<std::vector<int>>&w)
+{
+	vertexInGraph[v].visited = true;
+	for (int i=0; i<vertexInGraph[v].edges.size(); i++)
+	{
+		if(!vertexInGraph[vertexInGraph[v].edges[i]].visited)
+		{
+			w[v].push_back(vertexInGraph[v].edges[i]);
+			stp(vertexInGraph[v].edges[i], w);
+		}
+			
 	}
 }
