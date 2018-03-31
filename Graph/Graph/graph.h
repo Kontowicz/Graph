@@ -13,6 +13,7 @@ public:
 	void connectUnoriented(std::string nameFirst, std::string nameSecod, int weight); // Will create non-directional edge between vertex nameFirst and nameSecond with weight equal weight.
 	void connectOriented(std::string nameFirst, std::string nameSecod); // Will create directional edge between vertex nameFirst and nameSecond.
 	void connectOriented(std::string nameFirst, std::string nameSecod, int weight); // Will create directional edge between vertex nameFirst and nameSecond with weight equal weight.
+
 	void printMatrix(); // Print graph as matrix.
 	int graphOrder(); // Return ammoun of vertex in graph.
 	int graphSize(); // Return number of edges.
@@ -26,8 +27,12 @@ public:
 	void graphSquare(); // Make square of graph.
 	void lineGraph(); // Make new line graph.
 	bool isConnectedGraph(); // Return true when grapg is connected graph if not return false.
-	void connectedComponent(); // Print on screen connected component in graph.
+	void component();
+	int connectedComponent(); // Print on screen connected component in graph.
 	std::vector<std::vector<int>> depthFirstSpanningTree(); // Make depth spranning tree in graph. 
+	void removeEdge(int vertex, int vertex1);
+	void bridge();
+
 
 private:	
 	struct vertex

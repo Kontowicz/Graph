@@ -2,6 +2,7 @@
 #include <iostream>
 #include <list>
 #include <iomanip>
+#include <algorithm>
 
 
 graph::graph()
@@ -77,6 +78,8 @@ void graph::connectOriented(std::string nameFirst, std::string nameSecod, int we
 		std::cout << "Error!\n";
 	}
 }
+
+
 
 void graph::printMatrix()
 {
@@ -332,27 +335,33 @@ bool graph::isConnectedGraph()
 	}
 }
 
-void graph::connectedComponent()
+void graph::component()
+{
+	resetVisited();
+	connectedComponent();
+}
+
+int graph::connectedComponent()
 {
 	std::vector<int> w;
 	int all = 0;
 	int i = 0;
-	resetVisited();
 	while (all<vertexInGraph.size())
 	{
 		w.clear();
 		int p = firstUnvisited();
 		depthFirstSearch(p, w);
 		all += w.size();
-		std::cout << i << ":  ";
+		/*std::cout << i << ":  ";
 		for (auto value : w)
 		{
 			std::cout << value << " ";
 		}
-		std::cout << "\n";
+		std::cout << "\n";*/
 		i++;
 	}
 	
+	return  i;
 	
 }
 
@@ -365,6 +374,54 @@ std::vector<std::vector<int>> graph::depthFirstSpanningTree()
 	
 	return toReturn;
 }
+
+void graph::removeEdge(int vertex, int vertex1)
+{
+	if(isOriented())
+	{
+		vertexInGraph[vertex].edges.erase(std::find(vertexInGraph[vertex].edges.begin(), vertexInGraph[vertex].edges.end(), vertex1));
+	}
+	else
+	{
+		vertexInGraph[vertex].edges.erase(std::find(vertexInGraph[vertex].edges.begin(), vertexInGraph[vertex].edges.end(), vertex1));
+		vertexInGraph[vertex1].edges.erase(std::find(vertexInGraph[vertex1].edges.begin(), vertexInGraph[vertex1].edges.end(), vertex));
+	}
+}
+
+void graph::bridge()
+{
+	if(!isOriented())
+	{
+		int cc = connectedComponent();
+
+		for (int i=0; i<vertexInGraph.size(); i++)
+		{
+			std::vector<int> w;
+			int j = 0;
+			for (int j=vertexInGraph[i].edges.size()-1; j>=0; j--)
+			{
+				
+					int h = vertexInGraph[i].edges[0];
+					removeEdge(i, h);
+					if (i < h) {
+						resetVisited();
+						
+						int k = connectedComponent();
+						if (k > cc)
+						{
+							std::cout << i << "  " << h << "\n";
+						}
+					}
+					connectOriented(std::to_string(i), std::to_string(h));
+					connectOriented(std::to_string(h), std::to_string(i));
+				
+			}
+
+		}
+	}
+}
+
+
 
 bool graph::isConnected()
 {
@@ -397,6 +454,7 @@ void graph::vertex::addEdge(int num)
 {
 	edges.push_back(num);
 	weight.push_back(0);
+	
 }
 
 void graph::vertex::addEdge(int num, int distance)
@@ -479,9 +537,9 @@ void graph::breadthFirstSearch(int v, std::vector<int> &wek)
 
 void graph::resetVisited()
 {
-	for (auto vertex : vertexInGraph)
+	for(int i=0; i<vertexInGraph.size(); i++)
 	{
-		vertex.visited = false;
+		vertexInGraph[i].visited = false;
 	}
 }
 
