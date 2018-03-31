@@ -359,11 +359,11 @@ void graph::connectedComponent()
 std::vector<std::vector<int>> graph::depthFirstSpanningTree()
 {
 	resetVisited();
-	std::vector<std::vector<int>> we;
-	we.resize(vertexInGraph.size());
-	stp(0, we);
+	std::vector<std::vector<int>> toReturn;
+	toReturn.resize(vertexInGraph.size());
+	stpDFS(0, toReturn);
 	
-	return we;
+	return toReturn;
 }
 
 bool graph::isConnected()
@@ -431,6 +431,18 @@ bool graph::areVertexConnected(int vertex, int vertex1)
 			return true;
 	}
 	return false;
+}
+
+int graph::findVertex(const std::string& name)
+{
+	for (uint64_t i = 0; i<vertexInGraph.size(); i++)
+	{
+		if (vertexInGraph[i].name.substr(0, name.length()) == name)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
 
 void graph::depthFirstSearch(int v, std::vector<int> &wek)
@@ -529,7 +541,7 @@ int graph::firstUnvisited()
 	return -1;
 }
 
-void graph::stp(int v, std::vector<std::vector<int>>&w)
+void graph::stpDFS(int v, std::vector<std::vector<int>>&w)
 {
 	vertexInGraph[v].visited = true;
 	for (int i=0; i<vertexInGraph[v].edges.size(); i++)
@@ -537,7 +549,7 @@ void graph::stp(int v, std::vector<std::vector<int>>&w)
 		if(!vertexInGraph[vertexInGraph[v].edges[i]].visited)
 		{
 			w[v].push_back(vertexInGraph[v].edges[i]);
-			stp(vertexInGraph[v].edges[i], w);
+			stpDFS(vertexInGraph[v].edges[i], w);
 		}
 			
 	}

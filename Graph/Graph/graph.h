@@ -47,28 +47,15 @@ private:
 	std::vector<std::vector<bool>> matrix; // Graph matrix.
 	void saveAsMatrix(); 
 	bool areVertexConnected(int vertex, int vertex1); // Return information about conncetion between vertex and vertex1.
-	int findVertex(const std::string& name) // Return posistion of vertex with specific name in collection. When vertex is not found return -1.
-	{
-		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
-		{
-			if(vertexInGraph[i].name.substr(0,name.length())==name)
-			{
-				return i;
-			}
-		}
-		return -1;
-	} // Retuns position of vertex in collection vertexInGraph.
-	bool isConnected();
-	void makeUnoriented();
+	int findVertex(const std::string& name); // Return posistion of vertex with specific name in collection. When vertex is not found return -1.
+	bool isConnected(); // Check connection beetwen vertex.
+	void makeUnoriented(); // Make unorined graph form oriented version.
 	void depthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
 	void breadthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
 	void resetVisited(); // Set all vivted property of vertex to false.
 	void buildNewGraph(); // Make new graph repesentation from matrix.
 	void pathDFS(int start, int end, std::vector<int>&path);
-
 	bool isOriented(); // Function return true when graph is oriented if not return false.
-
 	int firstUnvisited(); // Return number in collection first unvisited vertex.
-
-	void stp(int v, std::vector<std::vector<int>>&w);
+	void stpDFS(int v, std::vector<std::vector<int>>&w);
 };
