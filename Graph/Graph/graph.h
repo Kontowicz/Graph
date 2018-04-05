@@ -13,7 +13,7 @@ public:
 	void connectUnoriented(std::string nameFirst, std::string nameSecod, int weight); // Will create non-directional edge between vertex nameFirst and nameSecond with weight equal weight.
 	void connectOriented(std::string nameFirst, std::string nameSecod); // Will create directional edge between vertex nameFirst and nameSecond.
 	void connectOriented(std::string nameFirst, std::string nameSecod, int weight); // Will create directional edge between vertex nameFirst and nameSecond with weight equal weight.
-
+	void removeEdge(std::string nameFirst, std::string nameSecond);
 	void printMatrix(); // Print graph as matrix.
 	int graphOrder(); // Return ammoun of vertex in graph.
 	int graphSize(); // Return number of edges.
@@ -30,10 +30,10 @@ public:
 	void component();
 	int connectedComponent(); // Print on screen connected component in graph.
 	std::vector<std::vector<int>> depthFirstSpanningTree(); // Make depth spranning tree in graph. 
-	void removeEdge(int vertex, int vertex1);
+	
 	void bridge();
 
-
+	void removeEdge(int vertex, int vertex1);
 private:	
 	struct vertex
 	{
@@ -63,4 +63,5 @@ private:
 	bool isOriented(); // Function return true when graph is oriented if not return false.
 	int firstUnvisited(); // Return number in collection first unvisited vertex.
 	void stpDFS(int v, std::vector<std::vector<int>>&w);
+	
 };

@@ -383,8 +383,25 @@ void graph::removeEdge(int vertex, int vertex1)
 	}
 	else
 	{
-		vertexInGraph[vertex].edges.erase(std::find(vertexInGraph[vertex].edges.begin(), vertexInGraph[vertex].edges.end(), vertex1));
-		vertexInGraph[vertex1].edges.erase(std::find(vertexInGraph[vertex1].edges.begin(), vertexInGraph[vertex1].edges.end(), vertex));
+		int i;
+		for(i=0; i<vertexInGraph[vertex].edges.size(); i++)
+		{
+			if(vertexInGraph[vertex].edges[i]==vertex1)
+			{
+				break;
+			}
+		}
+		vertexInGraph[vertex].edges.erase(vertexInGraph[vertex].edges.begin()+i);
+		vertexInGraph[vertex].weight.erase(vertexInGraph[vertex].weight.begin() + i);
+		for (i = 0; i<vertexInGraph[vertex1].edges.size(); i++)
+		{
+			if (vertexInGraph[vertex1].edges[i] == vertex)
+			{
+				break;
+			}
+		}
+		vertexInGraph[vertex1].edges.erase(vertexInGraph[vertex1].weight.begin()+i);
+		vertexInGraph[vertex1].weight.erase(vertexInGraph[vertex1].weight.begin() + i);
 	}
 }
 
