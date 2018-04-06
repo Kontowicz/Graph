@@ -131,8 +131,8 @@ namespace GraphTest
 
 			Assert::IsTrue(graph.vertexInGraph[0].edges[0].number == 1);
 			Assert::IsTrue(graph.vertexInGraph[5].edges[0].number == 2);
-			Assert::IsTrue(graph.vertexInGraph[1].edges[0].number == 0);
-			Assert::IsTrue(graph.vertexInGraph[2].edges[0].number == 5);
+			Assert::IsTrue(graph.vertexInGraph[1].edges.size() == 0);
+			Assert::IsTrue(graph.vertexInGraph[2].edges.size()==0);
 
 			Assert::IsTrue(graph.vertexInGraph[0].edges.size() == 1);
 			Assert::IsTrue(graph.vertexInGraph[5].edges.size() == 1);
@@ -183,7 +183,7 @@ namespace GraphTest
 			graph.removeEdge("0", "1");
 			Assert::IsTrue(graph.vertexInGraph[0].edges.size()==0);
 			Assert::IsTrue(graph.vertexInGraph[1].edges.size() == 0);
-			graph.addVertex("10");
 		}
+
 	};
 }

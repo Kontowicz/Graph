@@ -39,9 +39,10 @@ public:
 	{
 		uint64_t f = findVertex(nameFirst);
 		uint64_t s = findVertex(nameSecod);
-		if (f != -1 || s != -1)
+		if (f != -1 && s != -1)
 		{
 			vertexInGraph[f].addEdge(s);
+			vertexInGraph[s].addEdge(f);
 		}
 		else
 		{
@@ -110,7 +111,23 @@ public:
 
 	std::vector<vertex> vertexInGraph;
 	std::vector<std::vector<bool>> matrix;
+	void saveAsMarix()
+	{
+		matrix.clear();
+		matrix.resize(vertexInGraph.size());
+		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
+		{
+			matrix[i].resize(vertexInGraph.size());
+		}
 
+		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
+		{
+			for (uint64_t j = 0; j<vertexInGraph[i].edges.size(); j++)
+			{
+				matrix[i][vertexInGraph[i].edges[j].number] = true;
+			}
+		}
+	}
 	
 
 };
