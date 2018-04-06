@@ -42,7 +42,6 @@ public:
 		if (f != -1 || s != -1)
 		{
 			vertexInGraph[f].addEdge(s);
-			vertexInGraph[s].addEdge(f);
 		}
 		else
 		{
@@ -89,7 +88,25 @@ public:
 			std::cout << "Error!\n";
 		}
 	} 
-	
+	void removeEdge(std::string nameFirst, std::string nameSecond)
+	{
+		int f = findVertex(nameFirst);
+		int pos = -1;
+		int s = findVertex(nameSecond);
+		for(int i=0; i<vertexInGraph[f].edges.size(); i++)
+		{
+			if(vertexInGraph[f].edges[i].number==s)
+			{
+				pos = i;
+				break;
+			}
+		}
+		if(s!=-1 && f!=-1 && pos!=-1)
+		{
+			vertexInGraph[f].removeEdge(pos);
+//			vertexInGraph[s].removeEdge(f);
+		}
+	}
 
 	std::vector<vertex> vertexInGraph;
 	std::vector<std::vector<bool>> matrix;

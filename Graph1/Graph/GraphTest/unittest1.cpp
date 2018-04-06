@@ -166,5 +166,24 @@ namespace GraphTest
 			Assert::IsTrue(graph.vertexInGraph[5].edges.size() == 1);
 			Assert::IsTrue(graph.vertexInGraph[3].edges.empty());
 		}
+
+		TEST_METHOD(removeEdgeGraph)
+		{
+			graph graph;
+			graph.addVertex("0");
+			graph.addVertex("1");
+			graph.addVertex("2");
+			graph.addVertex("3");
+			graph.addVertex("4");
+			graph.addVertex("5");
+
+			graph.connectUnoriented("0", "1");
+			graph.connectUnoriented("2", "5");
+
+			graph.removeEdge("0", "1");
+			Assert::IsTrue(graph.vertexInGraph[0].edges.size()==0);
+			Assert::IsTrue(graph.vertexInGraph[1].edges.size() == 0);
+			graph.addVertex("10");
+		}
 	};
 }
