@@ -136,7 +136,7 @@ int graph::vertexDegree(std::string name)
 
 bool graph::isComplete()
 {
-	return graphSize() == ((vertexInGraph.size()*(vertexInGraph.size()-1))/(2));
+	return graphSize() == ((vertexInGraph.size()*(vertexInGraph.size() - 1)) / (2));
 }
 
 int graph::graphDegree()

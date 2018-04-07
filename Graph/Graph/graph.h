@@ -20,6 +20,7 @@ public:
 	int vertexDegree(std::string name); // Return degree of vertex with name=name.
 	bool isComplete(); // Check graph complete.
 	int graphDegree(); // Return max degree of vertex.
+
 	std::vector<int> DFS(std::string name); // DFS algorith, starts fom vertex name. Function return vector with wertex.
 	std::vector<int> BFS(std::string name); // BFS algorith, starts fom vertex name. Function return vector with wertex.
 	std::vector<int> path(std::string nameStart, std::string nameEnd); // Function fund path between vertex.

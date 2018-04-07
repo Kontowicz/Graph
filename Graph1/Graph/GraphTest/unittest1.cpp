@@ -193,7 +193,7 @@ namespace GraphTest
 		
 		}
 
-		TEST_METHOD(seveAsMatrix)
+		TEST_METHOD(saveAsMatrix)
 		{
 			graph graph;
 			graph.addVertex("0");
@@ -225,6 +225,96 @@ namespace GraphTest
 				}
 			}
 			
+		}
+
+		TEST_METHOD(graphOrder)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+			g.addVertex("4");
+			Assert::IsTrue(g.graphOrder() == 5);
+		}
+
+		TEST_METHOD(graphSize)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+			g.addVertex("4");
+
+			g.connectUnoriented("0", "1");
+			g.connectUnoriented("1", "2");
+			g.connectUnoriented("2", "3");
+			g.connectUnoriented("4", "1");
+			g.connectUnoriented("3", "1");
+			g.connectUnoriented("3", "4");
+
+			Assert::IsTrue(g.graphSize() == 6);
+		}
+
+		TEST_METHOD(vertexDegree)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+			g.addVertex("4");
+
+			g.connectUnoriented("0", "1");
+			g.connectUnoriented("0", "2");
+			g.connectUnoriented("0", "3");
+			Assert::IsTrue(g.vertexDegree("0") == 3);
+
+			g.connectUnoriented("4", "1");
+			g.connectUnoriented("4", "1");
+			Assert::IsTrue(g.vertexDegree("4") == 2);
+		}
+
+		TEST_METHOD(graphComplete)
+		{
+			graph graph1;
+			graph1.addVertex("0");
+			Assert::IsTrue(graph1.isComplete() == true);
+
+			graph graph2;
+			graph2.addVertex("0");
+			graph2.addVertex("1");
+			graph2.connectUnoriented("0", "1");
+			Assert::IsTrue(graph2.isComplete() == true);
+
+			graph graph3;
+			graph3.addVertex("0");
+			graph3.addVertex("1");
+			graph3.addVertex("2");
+			graph3.connectUnoriented("0", "1");
+			graph3.connectUnoriented("2", "1");
+			Assert::IsTrue(graph3.isComplete() == false);
+		}
+
+		TEST_METHOD(graphDegree)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+			g.addVertex("4");
+
+			g.connectUnoriented("0", "1");
+			g.connectUnoriented("0", "2");
+			g.connectUnoriented("0", "3");
+		
+
+			g.connectUnoriented("4", "1");
+			g.connectUnoriented("4", "1");
+			
+			Assert::IsTrue(g.graphDegree() == 3);
 		}
 	};
 }

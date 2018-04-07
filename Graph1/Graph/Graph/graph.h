@@ -6,6 +6,10 @@
 class graph
 {
 public:
+	graph()
+	{
+		isUnoriented = true;
+	}
 	void addVertex(std::string name) // Func add new vertex to collection.
 	{
 		if (findVertex(name) == -1)
@@ -75,6 +79,7 @@ public:
 		{
 			std::cout << "Error!\n";
 		}
+		isUnoriented = false;
 	} 
 	void connectOriented(std::string nameFirst, std::string nameSecod, int weight) // Will create directional edge between vertex nameFirst and nameSecond with weight equal weight.
 	{
@@ -88,8 +93,9 @@ public:
 		{
 			std::cout << "Error!\n";
 		}
+		isUnoriented = false;
 	} 
-	void removeEdge(std::string nameFirst, std::string nameSecond)
+	/*to do*/void removeEdge(std::string nameFirst, std::string nameSecond)
 	{
 		int f = findVertex(nameFirst);
 		int pos = -1;
@@ -109,8 +115,53 @@ public:
 		}
 	}
 
+	int graphOrder()
+	{
+		return  vertexInGraph.size();
+	}  // Return ammoun of vertex in graph.
+	int graphSize()
+	{
+		int toRet = 0;
+		
+		for (auto vertex : vertexInGraph)
+		{
+			toRet += vertex.edges.size();
+		}
+		if(isUnoriented)
+		{
+			return toRet / 2;
+		}
+		else { return  toRet; }
+	}
+	int vertexDegree(std::string name)
+	{
+		int pos = findVertex(name);
+		if(pos != -1)
+		{
+			return vertexInGraph[pos].edges.size();
+		}
+		else { throw std::exception("Vertex didn't exist"); }
+	}
+	bool isComplete()
+	{
+		return graphSize() == ((vertexInGraph.size()*(vertexInGraph.size() - 1)) / (2));
+	}
+	int graphDegree()
+	{
+		int toReturn = 0;
+		for (auto vertex : vertexInGraph)
+		{
+			if (toReturn<vertex.edges.size())
+			{
+				toReturn = vertex.edges.size();
+			}
+
+			return toReturn;
+		}
+	}
 	std::vector<vertex> vertexInGraph;
 	std::vector<std::vector<bool>> matrix;
+	bool isUnoriented;
 	void saveAsMarix()
 	{
 		matrix.clear();
@@ -128,6 +179,8 @@ public:
 			}
 		}
 	}
+
+	
 	
 
 };
