@@ -17,6 +17,6 @@ e:\repos\c++\graph\graph1\graph\graph\graph.h(97): warning C4018: "<": niezgodno
 e:\repos\c++\graph\graph1\graph\graph\graph.h(120): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
 e:\repos\c++\graph\graph1\graph\graph\graph.h(125): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
 e:\repos\c++\graph\graph1\graph\graph\graph.h(127): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
-e:\repos\c++\graph\graph1\graph\graphtest\unittest1.cpp(198): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
-e:\repos\c++\graph\graph1\graph\graphtest\unittest1.cpp(200): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph1\graph\graphtest\unittest1.cpp(220): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+e:\repos\c++\graph\graph1\graph\graphtest\unittest1.cpp(222): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
   GraphTest.vcxproj -> E:\Repos\C++\Graph\Graph1\Graph\Debug\GraphTest.dll

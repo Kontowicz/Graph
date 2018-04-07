@@ -126,8 +126,8 @@ namespace GraphTest
 			graph.addVertex("vertex3");
 			graph.addVertex("vertex4");
 			graph.addVertex("vertex5");
-			graph.connectUnoriented("vertex0", "vertex1");
-			graph.connectUnoriented("vertex5", "vertex2");
+			graph.connectOriented("vertex0", "vertex1");
+			graph.connectOriented("vertex5", "vertex2");
 
 			Assert::IsTrue(graph.vertexInGraph[0].edges[0].number == 1);
 			Assert::IsTrue(graph.vertexInGraph[5].edges[0].number == 2);
@@ -181,9 +181,50 @@ namespace GraphTest
 			graph.connectUnoriented("2", "5");
 
 			graph.removeEdge("0", "1");
+			graph.removeEdge("2", "5");
+
+			graph.removeEdge("1", "0");
+			graph.removeEdge("5", "2");
 			Assert::IsTrue(graph.vertexInGraph[0].edges.size()==0);
 			Assert::IsTrue(graph.vertexInGraph[1].edges.size() == 0);
+			Assert::IsTrue(graph.vertexInGraph[2].edges.size() == 0);
+			Assert::IsTrue(graph.vertexInGraph[3].edges.size() == 0);
+			Assert::IsTrue(graph.vertexInGraph[4].edges.size() == 0);
+		
 		}
 
+		TEST_METHOD(seveAsMatrix)
+		{
+			graph graph;
+			graph.addVertex("0");
+			graph.addVertex("1");
+			graph.addVertex("2");
+			graph.addVertex("3");
+			graph.addVertex("4");
+			
+
+			graph.connectUnoriented("0", "1");
+			graph.connectUnoriented("2", "1");
+			graph.connectUnoriented("3", "4");
+
+			graph.saveAsMarix();
+
+			graph.matrix;
+			const std::vector<std::vector<bool>> test{
+			{0,1,0,0,0},
+			{1,0,1,0,0},
+			{0,1,0,0,0},
+			{0,0,0,0,1},
+			{0,0,0,1,0}
+				};
+			for(int i=0; i<graph.matrix.size(); i++)
+			{
+				for(int j=0; j<graph.matrix[i].size(); j++)
+				{
+					Assert::IsTrue(graph.matrix[i][j] == test[i][j]);
+				}
+			}
+			
+		}
 	};
 }
