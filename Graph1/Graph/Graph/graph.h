@@ -27,17 +27,7 @@ public:
 		}
 		else { return; }
 	}
-	int findVertex(const std::string& name)
-	{
-		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
-		{
-			if (vertexInGraph[i].name.substr(0, name.length()) == name)
-			{
-				return i;
-			}
-		}
-		return -1;
-	}
+	
 
 	void connectUnoriented(std::string nameFirst, std::string nameSecod) // Will create non-directional edge between vertex nameFirst and nameSecond.
 	{
@@ -95,7 +85,7 @@ public:
 		}
 		isUnoriented = false;
 	} 
-	/*to do*/void removeEdge(std::string nameFirst, std::string nameSecond)
+	void removeEdge(std::string nameFirst, std::string nameSecond)
 	{
 		int f = findVertex(nameFirst);
 		int pos = -1;
@@ -122,12 +112,12 @@ public:
 	int graphSize()
 	{
 		int toRet = 0;
-		
+
 		for (auto vertex : vertexInGraph)
 		{
 			toRet += vertex.edges.size();
 		}
-		if(isUnoriented)
+		if (isUnoriented)
 		{
 			return toRet / 2;
 		}
@@ -136,7 +126,7 @@ public:
 	int vertexDegree(std::string name)
 	{
 		int pos = findVertex(name);
-		if(pos != -1)
+		if (pos != -1)
 		{
 			return vertexInGraph[pos].edges.size();
 		}
@@ -155,13 +145,38 @@ public:
 			{
 				toReturn = vertex.edges.size();
 			}
-
-			return toReturn;
 		}
+		return toReturn;
 	}
+	bool areVertexConnected(int vertex, int vertex1)
+	{
+		for (int i = 0; i<vertexInGraph[vertex].edges.size(); i++)
+		{
+			if (vertexInGraph[vertex].edges[i].number == vertex1)
+				return true;
+		}
+		return false;
+	}
+	int findVertex(const std::string& name)
+	{
+		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
+		{
+			if (vertexInGraph[i].name.substr(0, name.length()) == name)
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+
+
+
+#pragma region private
 	std::vector<vertex> vertexInGraph;
 	std::vector<std::vector<bool>> matrix;
 	bool isUnoriented;
+
 	void saveAsMarix()
 	{
 		matrix.clear();
@@ -178,7 +193,40 @@ public:
 				matrix[i][vertexInGraph[i].edges[j].number] = true;
 			}
 		}
+	} 
+	void makeUnoriented()
+	{
+		for (int i = 0; i<vertexInGraph.size(); i++)
+		{
+			for (int j = 0; j<vertexInGraph[i].edges.size(); j++)
+			{
+				if (!areVertexConnected(vertexInGraph[i].edges[j].number, i))
+				{
+					vertexInGraph[vertexInGraph[i].edges[j].number].edges.push_back(i);
+				}
+			}
+		}
 	}
+	void resetVisited()
+	{
+		for (int i = 0; i<vertexInGraph.size(); i++)
+		{
+			vertexInGraph[i].visited = false;
+		}
+	}
+	int firstUnvisited()
+	{
+		for (int i = 0; i<vertexInGraph.size(); i++)
+		{
+			if (!vertexInGraph[i].visited)
+				return i;
+		}
+		return -1;
+	}
+#pragma endregion 
+	
+	
+	
 
 	
 	

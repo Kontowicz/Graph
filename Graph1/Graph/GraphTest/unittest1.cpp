@@ -316,5 +316,123 @@ namespace GraphTest
 			
 			Assert::IsTrue(g.graphDegree() == 3);
 		}
+
+		TEST_METHOD(areConnected)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+			g.addVertex("4");
+
+			g.connectUnoriented("0", "1");
+			g.connectUnoriented("0", "2");
+			g.connectUnoriented("0", "3");
+
+
+			g.connectUnoriented("4", "1");
+			Assert::IsTrue(g.areVertexConnected(0, 1) == true);
+			Assert::IsTrue(g.areVertexConnected(0, 2) == true);
+			Assert::IsTrue(g.areVertexConnected(0, 3) == true);
+			Assert::IsTrue(g.areVertexConnected(4, 1) == true);
+
+			Assert::IsTrue(g.areVertexConnected(2, 3) == false);
+			Assert::IsTrue(g.areVertexConnected(2, 4) == false);
+			Assert::IsTrue(g.areVertexConnected(0, 4) == false);
+		}
+
+		TEST_METHOD(makeUnoriented)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+
+			g.connectOriented("0", "1");
+			g.connectOriented("0", "2");
+			g.connectOriented("0", "3");
+			
+			g.connectOriented("1", "0");
+			g.connectOriented("1", "2");
+			g.connectOriented("1", "3");
+
+			g.connectOriented("2", "0");
+			g.connectOriented("2", "1");
+			g.connectOriented("2", "3");
+
+			g.connectOriented("3", "0");
+			g.connectOriented("3", "1");
+			g.connectOriented("3", "2");
+
+			g.makeUnoriented();
+			g.saveAsMarix();
+
+			const std::vector<std::vector<bool>> test{
+			{0,1,1,1},
+			{1,0,1,1},
+			{1,1,0,1},
+			{1,1,1,0}
+			};
+
+			for(int i=0; i<test.size(); i++)
+			{
+				for(int j=0; j<test.size(); j++)
+				{
+					Assert::IsTrue(test[i][j] == g.matrix[i][j]);
+				}
+			}
+		}
+
+		TEST_METHOD(resetVisited)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+
+			g.vertexInGraph[0].visited = true;
+			g.vertexInGraph[1].visited = true;
+			g.vertexInGraph[2].visited = true;
+			g.vertexInGraph[3].visited = true;
+
+			g.resetVisited();
+
+			for(int i=0; i<g.vertexInGraph.size(); i++)
+			{
+				Assert::IsTrue(g.vertexInGraph[i].visited==false);
+			}
+
+			g.vertexInGraph[1].visited = true;
+			Assert::IsTrue(g.vertexInGraph[0].visited == false);
+			Assert::IsTrue(g.vertexInGraph[1].visited == true);
+			Assert::IsTrue(g.vertexInGraph[2].visited == false);
+			Assert::IsTrue(g.vertexInGraph[3].visited == false);
+		}
+
+		TEST_METHOD(firstUnivisited)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+			g.addVertex("4");
+			g.addVertex("5");
+			g.addVertex("6");
+
+			Assert::IsTrue(g.firstUnvisited() == 0);
+			g.vertexInGraph[0].visited = true;
+			g.vertexInGraph[1].visited = true;
+			Assert::IsTrue(g.firstUnvisited() == 2);
+			g.vertexInGraph[2].visited = true;
+			g.vertexInGraph[3].visited = true;
+			g.vertexInGraph[4].visited = true;
+			Assert::IsTrue(g.firstUnvisited() == 5);
+			g.vertexInGraph[2].visited = true;
+			Assert::IsTrue(g.firstUnvisited() == 6);
+		}
 	};
 }

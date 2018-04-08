@@ -55,14 +55,17 @@ private:
 	bool areVertexConnected(int vertex, int vertex1); // Return information about conncetion between vertex and vertex1.
 	int findVertex(const std::string& name); // Return posistion of vertex with specific name in collection. When vertex is not found return -1.
 	bool isConnected(); // Check connection beetwen vertex.
+
 	void makeUnoriented(); // Make unorined graph form oriented version.
-	void depthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
-	void breadthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
-	void resetVisited(); // Set all vivted property of vertex to false.
-	void buildNewGraph(); // Make new graph repesentation from matrix.
-	void pathDFS(int start, int end, std::vector<int>&path);
 	bool isOriented(); // Function return true when graph is oriented if not return false.
 	int firstUnvisited(); // Return number in collection first unvisited vertex.
+	void resetVisited(); // Set all vivted property of vertex to false.
+
+
+	void buildNewGraph(); // Make new graph repesentation from matrix.
+	void depthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
+	void breadthFirstSearch(int v, std::vector<int> &wek); // Recursive algorithm.
+	void pathDFS(int start, int end, std::vector<int>&path);
 	void stpDFS(int v, std::vector<std::vector<int>>&w);
 	
 };
