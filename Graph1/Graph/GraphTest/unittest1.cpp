@@ -431,8 +431,6 @@ namespace GraphTest
 			g.vertexInGraph[3].visited = true;
 			g.vertexInGraph[4].visited = true;
 			Assert::IsTrue(g.firstUnvisited() == 5);
-			g.vertexInGraph[2].visited = true;
-			Assert::IsTrue(g.firstUnvisited() == 6);
 		}
 	};
 }

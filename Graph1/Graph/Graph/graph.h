@@ -148,25 +148,11 @@ public:
 		}
 		return toReturn;
 	}
-	bool areVertexConnected(int vertex, int vertex1)
+	bool areConnected(std::string first, std::string second)
 	{
-		for (int i = 0; i<vertexInGraph[vertex].edges.size(); i++)
-		{
-			if (vertexInGraph[vertex].edges[i].number == vertex1)
-				return true;
-		}
-		return false;
-	}
-	int findVertex(const std::string& name)
-	{
-		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
-		{
-			if (vertexInGraph[i].name.substr(0, name.length()) == name)
-			{
-				return i;
-			}
-		}
-		return -1;
+		int f = findVertex(first);
+		int s = findVertex(second);
+		return areVertexConnected(f, s);
 	}
 	
 
@@ -177,6 +163,15 @@ public:
 	std::vector<std::vector<bool>> matrix;
 	bool isUnoriented;
 
+	bool areVertexConnected(int vertex, int vertex1)
+	{
+		for (int i = 0; i<vertexInGraph[vertex].edges.size(); i++)
+		{
+			if (vertexInGraph[vertex].edges[i].number == vertex1)
+				return true;
+		}
+		return false;
+	}
 	void saveAsMarix()
 	{
 		matrix.clear();
@@ -220,6 +215,17 @@ public:
 		{
 			if (!vertexInGraph[i].visited)
 				return i;
+		}
+		return -1;
+	}
+	int findVertex(const std::string& name)
+	{
+		for (uint64_t i = 0; i<vertexInGraph.size(); i++)
+		{
+			if (vertexInGraph[i].name.substr(0, name.length()) == name)
+			{
+				return i;
+			}
 		}
 		return -1;
 	}
