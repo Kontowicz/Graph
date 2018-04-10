@@ -23,5 +23,4 @@ e:\repos\c++\graph\graph1\graph\graph\graph.h(207): warning C4018: "<": niezgodn
 e:\repos\c++\graph\graph1\graph\graph\graph.h(214): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
 e:\repos\c++\graph\graph1\graph\graph\graph.h(225): warning C4244: "argument": konwersja z "uint64_t" do "const unsigned int", możliwa utrata danych
 e:\repos\c++\graph\graph1\graph\graph\graph.h(227): warning C4244: "return": konwersja z "uint64_t" do "int", możliwa utrata danych
-e:\repos\c++\graph\graph1\graph\graph\main.cpp(68): warning C4390: ";": znaleziono kontrolowaną pustą instrukcję; czy to było zamierzone?
   Graph.vcxproj -> E:\Repos\C++\Graph\Graph1\Graph\Debug\Graph.exe
