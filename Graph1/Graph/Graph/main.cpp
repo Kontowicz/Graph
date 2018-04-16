@@ -41,6 +41,12 @@ int getDataInt()
 	return toReturn;
 }
 
+void wait()
+{
+	std::cout << "\nPress enter to continue...";
+	getchar();
+	getchar();
+}
 int main()
 {
 	short s;
@@ -70,6 +76,10 @@ int main()
 			{
 				std::cout << "Enter vertex name: ";
 				graph.addVertex(getDataString());
+					if(graph.error)
+					{
+						std::cout << "Error";
+					}
 				break;
 			}
 			case 2:
@@ -182,5 +192,8 @@ int main()
 				std::cout << "Error";
 			}
 		}
+		std::cin.clear();
+		wait();
+		system("cls");
 	} while (s != 0);
 }

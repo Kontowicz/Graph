@@ -10,12 +10,14 @@ public:
 	{
 		isUnoriented = true;
 	}
+	bool error = false;
+
 	void addVertex(std::string name) // Func add new vertex to collection.
 	{
 		if (findVertex(name) == -1)
 			vertexInGraph.emplace_back(name);
 		else
-			std::cout << "Error!\n";
+			error = true;
 	} 
 	void removeVertex(std::string name) // This func remove specific vertex from collection.
 	{
@@ -25,7 +27,7 @@ public:
 			auto it = vertexInGraph.begin() + pos;
 			vertexInGraph.erase(it);
 		}
-		else { return; }
+		else { error = true; }
 	}
 	
 	void connectUnoriented(std::string nameFirst, std::string nameSecod) // Will create non-directional edge between vertex nameFirst and nameSecond.
@@ -39,7 +41,7 @@ public:
 		}
 		else
 		{
-			std::cout << "Error!\n";
+			error = true;
 		}
 	}
 	void connectUnoriented(std::string nameFirst, std::string nameSecod, int weight)   // Will create non-directional edge between vertex nameFirst and nameSecond with weight equal weight.
@@ -53,7 +55,7 @@ public:
 		}
 		else
 		{
-			std::cout << "Error!\n";
+			error = true;
 		}
 	}
 	void connectOriented(std::string nameFirst, std::string nameSecod) // Will create directional edge between vertex nameFirst and nameSecond.
@@ -66,7 +68,7 @@ public:
 		}
 		else
 		{
-			std::cout << "Error!\n";
+			error = true;
 		}
 		isUnoriented = false;
 	} 
@@ -80,7 +82,7 @@ public:
 		}
 		else
 		{
-			std::cout << "Error!\n";
+			error = true;
 		}
 		isUnoriented = false;
 	} 
@@ -89,6 +91,11 @@ public:
 		int f = findVertex(nameFirst);
 		int pos = -1;
 		int s = findVertex(nameSecond);
+		if(s==-1 || f==-1)
+		{
+			error = true;
+			return;
+		}
 		for(int i=0; i<vertexInGraph[f].edges.size(); i++)
 		{
 			if(vertexInGraph[f].edges[i].number==s)
@@ -129,7 +136,7 @@ public:
 		{
 			return vertexInGraph[pos].edges.size();
 		}
-		else { throw std::exception("Vertex didn't exist"); }
+		else { error = true; }
 	}
 	bool isComplete()
 	{
