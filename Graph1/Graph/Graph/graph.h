@@ -28,7 +28,6 @@ public:
 		else { return; }
 	}
 	
-
 	void connectUnoriented(std::string nameFirst, std::string nameSecod) // Will create non-directional edge between vertex nameFirst and nameSecond.
 	{
 		uint64_t f = findVertex(nameFirst);
@@ -154,7 +153,15 @@ public:
 		int s = findVertex(second);
 		return areVertexConnected(f, s);
 	}
-	
+	std::vector<std::string> getName()
+	{
+		std::vector<std::string> toReturn;
+		for(auto it = vertexInGraph.begin(); it!= vertexInGraph.end(); it++)
+		{
+			toReturn.push_back(it->name);
+		}
+		return toReturn;
+	}
 
 
 

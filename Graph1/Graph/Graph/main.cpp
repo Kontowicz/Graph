@@ -61,7 +61,7 @@ int main()
 		std::cout << "10. Are connected\n";
 		std::cout << "11. Is Complete\n";
 		std::cout << "12. Print all vertex name\n";
-		std::cout << "13. Get all edges of vertex\n";
+
 #pragma endregion 
 		s = getDataInt();
 		switch (s)
@@ -99,6 +99,87 @@ int main()
 						break;
 					}
 				}
+					break;
+			}
+			case 4:
+			{
+				std::cout << "1. Edge with domain weight (0)\n";
+				std::cout << "2. Edge with specific weight \n";
+				switch (getDataInt()) {
+					case 1: {
+						std::cout << "Enter name, second name vertex, domain weight 0: ";
+						graph.connectOriented(getDataString(), getDataString());
+						break;
+					}
+					case 2: {
+						std::cout << "Enter name, second name vertex, weight: ";
+						graph.connectOriented(getDataString(), getDataString(), getDataInt());
+						break;
+					}
+					default: {
+						std::cout << "Error\n";
+						break;
+					}
+				}
+				break;
+			}
+			case 5:
+			{
+				std::cout << "Enter name, second name of vertex: ";
+				graph.removeEdge(getDataString(), getDataString());
+				break;
+			}
+			case 6:
+			{
+				std::cout << "Enter vertex name: ";
+				graph.vertexDegree(getDataString());
+				break;
+			}
+			case 7:
+			{
+				std::cout<<"Vertex in graph: "<<graph.graphOrder()<<"\n";
+				break;
+			}
+			case 8:
+			{
+				std::cout << "Graph size: " << graph.graphSize() << "\n";
+				break;
+			}
+			case 9:
+			{
+				std::cout << "Graph degree: " << graph.graphDegree() << "\n";
+				break;
+			}
+			case 10:
+			{
+				std::cout << "Enter name and second name of vertex: ";
+				std::string result = graph.areConnected(getDataString(), getDataString()) ? "Yes" : "No";
+				std::cout << result << "\n";
+				break;		
+			}
+			case 11:
+			{
+				std::string result = graph.isComplete() ? "Yes" : "No";
+				std::cout << result << "\n";
+				break;
+			}
+			case 12:
+			{
+				std::cout << "Vertex name:\n";
+				std::vector<std::string> result = graph.getName();
+				int counter = 0;
+					for (auto it = result.begin(); it!=result.end(); it++)
+					{
+						std::cout.fill('0');
+						std::cout.width(std::to_string(result.size()).size());
+						std::cout << counter++;
+						std::cout << " " << *it << "\n";
+					}
+				break;
+			}
+			default:
+			{
+				std::cout << "Error";
 			}
 		}
 	} while (s != 0);
