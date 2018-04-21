@@ -196,6 +196,44 @@ public:
 		return matrix;
 	}
 
+	void graphSquare()
+	{
+		save();
+		int r = matrix.size();
+		std::vector<std::vector<bool>> tmp;
+		tmp.resize(r);
+
+		for (int i = 0; i<r; i++)
+			tmp[i].resize(r);
+
+		for (int i = 0; i < r; i++)
+		{
+			for (int j = 0; j < r; j++)
+				tmp[i][j] = matrix[i][j];
+
+			for (int j = 0; j < r; j++) {
+				if ((i != j) && matrix[i][j]) {
+					for (int k = 0; k < r; k++)
+						if (matrix[j][k]) tmp[i][k] = 1;
+				}
+			}
+		}
+
+		matrix = tmp;
+		save();
+	}
+	
+	void depthFirstSearch(int v, std::vector<int> &wek)
+	{
+		vertexInGraph[v].visited = true;
+		wek.push_back(v);
+		for (uint64_t i = 0; i < vertexInGraph[v].edges.size(); i++)
+		{
+			if (!vertexInGraph[vertexInGraph[v].edges[i].number].visited)
+				depthFirstSearch(vertexInGraph[v].edges[i].number, wek);
+		}
+	}
+
 #pragma region private
 	std::vector<vertex> vertexInGraph;
 	std::vector<std::vector<bool>> matrix;

@@ -41,6 +41,29 @@ int getDataInt()
 	return toReturn;
 }
 
+int getDataInt(int min, int max)
+{
+	int toReturn = 0;
+	bool isOk = false;
+	do
+	{
+		if (std::cin >> toReturn)
+		{
+			isOk = true;
+			if (toReturn<0 || toReturn>max)
+				isOk = false;
+		}
+		else
+		{
+			std::cout << "Error in input data!\nTry again: ";
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		}
+	} while (!isOk);
+
+	return toReturn;
+}
+
 void wait()
 {
 	std::cout << "\nPress enter to continue...";
@@ -68,7 +91,8 @@ int main()
 		std::cout << "11. Is Complete\n";
 		std::cout << "12. Print all vertex name\n";
 		std::cout << "13. Graph transposition\n";
-		std::cout << "14 Print matrix\n";
+		std::cout << "14. Print matrix\n";
+		std::cout << "15. DFS\n";
 
 #pragma endregion 
 		s = getDataInt();
@@ -220,6 +244,26 @@ int main()
 						std::cout << std::left << m[i][j];
 					}
 					std::cout << "\n";
+				}
+				break;
+			}
+			case 15:
+			{
+				std::vector<int> tmp;
+				std::cout << "Enter start vertex name: ";
+				int pos = graph.findVertex(getDataString());
+				while (pos<0 || pos>graph.matrix.size())
+				{
+					pos = graph.findVertex(getDataString());
+				}
+				graph.depthFirstSearch(pos, tmp);
+				std::cout << "DFS:\n";
+				for (int i = 0; i < tmp.size(); ++i)
+				{
+					if (i + 1 % 10 == 0)
+						std::cout << "\n";
+
+					std::cout << tmp[i] << " ";
 				}
 				break;
 			}
