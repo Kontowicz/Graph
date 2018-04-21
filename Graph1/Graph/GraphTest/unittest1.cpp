@@ -432,5 +432,28 @@ namespace GraphTest
 			g.vertexInGraph[4].visited = true;
 			Assert::IsTrue(g.firstUnvisited() == 5);
 		}
+
+		TEST_METHOD(transposition)
+		{
+			graph g;
+			g.addVertex("0");
+			g.addVertex("1");
+			g.addVertex("2");
+			g.addVertex("3");
+
+			g.connectOriented("1", "0");
+			g.connectUnoriented("2", "1");
+			g.connectOriented("3","2");
+
+			g.transposition();
+
+			std::vector<std::vector<bool>> tmp{
+			{0,1,0,0},
+			{0,0,1,0},
+			{0,1,0,1},
+			{0,0,0,0},
+			};
+			Assert::IsTrue(g.matrix == tmp);
+		}
 	};
 }

@@ -67,6 +67,8 @@ int main()
 		std::cout << "10. Are connected\n";
 		std::cout << "11. Is Complete\n";
 		std::cout << "12. Print all vertex name\n";
+		std::cout << "13. Graph transposition\n";
+		std::cout << "14 Print matrix\n";
 
 #pragma endregion 
 		s = getDataInt();
@@ -185,6 +187,40 @@ int main()
 						std::cout << counter++;
 						std::cout << " " << *it << "\n";
 					}
+				break;
+			}
+			case 13:
+			{
+				graph.transposition();
+				break;
+			}
+			case 14:
+			{
+				graph.saveAsMarix();
+				auto m = graph.getMatrix();
+				std::cout.width(3);
+				std::cout.fill(' ');
+				std::cout << std::left << "";
+				for(int i=0; i<m.size(); i++)
+				{
+					std::cout.width(3);
+					std::cout.fill(' ');
+					std::cout << std::left<<i;
+				}
+				std::cout << "\n";
+				for(int i=0; i<m.size(); i++)
+				{
+					std::cout.width(3);
+					std::cout.fill(' ');
+					std::cout << std::left << i;
+					for(int j=0; j<m[i].size(); j++)
+					{
+						std::cout.width(3);
+						std::cout.fill(' ');
+						std::cout << std::left << m[i][j];
+					}
+					std::cout << "\n";
+				}
 				break;
 			}
 			default:

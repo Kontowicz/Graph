@@ -11,7 +11,7 @@ public:
 		isUnoriented = true;
 	}
 	bool error = false;
-
+#pragma region vertex/edge operations
 	void addVertex(std::string name) // Func add new vertex to collection.
 	{
 		if (findVertex(name) == -1)
@@ -29,7 +29,7 @@ public:
 		}
 		else { error = true; }
 	}
-	
+
 	void connectUnoriented(std::string nameFirst, std::string nameSecod) // Will create non-directional edge between vertex nameFirst and nameSecond.
 	{
 		uint64_t f = findVertex(nameFirst);
@@ -110,6 +110,7 @@ public:
 //			vertexInGraph[s].removeEdge(f);
 		}
 	}
+#pragma endregion 
 
 	int graphOrder()
 	{
@@ -170,7 +171,30 @@ public:
 		return toReturn;
 	}
 
+	void transposition()
+	{
+		saveAsMarix();
+		std::vector<std::vector<bool>> tmp;
+		tmp.resize(matrix.size());
+		for(int i=0; i<matrix.size(); i++)
+		{
+			tmp[i].resize(matrix.size());
+		}
 
+		for(int i=0; i<matrix.size(); i++)
+		{
+			for(int j=0; j<matrix.size(); j++)
+			{
+				tmp[j][i] = matrix[i][j];
+			}
+		}
+		matrix = tmp;
+		save(); // Save new graph from matrix
+	} 
+	const std::vector<std::vector<bool>> getMatrix()
+	{
+		return matrix;
+	}
 
 #pragma region private
 	std::vector<vertex> vertexInGraph;
@@ -243,6 +267,20 @@ public:
 		}
 		return -1;
 	}
+	void save() 
+	{
+		for(int i=0; i<matrix.size(); i++)
+		{
+			vertexInGraph[i].edges.clear();
+			for(int j=0; j<matrix.size(); j++)
+			{
+				if(matrix[i][j])
+				{
+					vertexInGraph[i].addEdge(j);
+				}
+			}
+		}
+	}//Make new graph representation from matrix
 #pragma endregion 
 	
 	
