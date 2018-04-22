@@ -2,6 +2,7 @@
 #include "edge.h"
 #include "vertex.h"
 #include <iostream>
+#include <list>
 
 class graph
 {
@@ -64,7 +65,7 @@ public:
 		uint64_t s = findVertex(nameSecod);
 		if (f != -1 || s != -1)
 		{
-			vertexInGraph[f].addEdge(s);
+			vertexInGraph[s].addEdge(f);
 		}
 		else
 		{
@@ -107,7 +108,6 @@ public:
 		if(s!=-1 && f!=-1 && pos!=-1)
 		{
 			vertexInGraph[f].removeEdge(pos);
-//			vertexInGraph[s].removeEdge(f);
 		}
 	}
 #pragma endregion 
@@ -198,7 +198,7 @@ public:
 
 	void graphSquare()
 	{
-		save();
+		saveAsMarix();
 		int r = matrix.size();
 		std::vector<std::vector<bool>> tmp;
 		tmp.resize(r);
@@ -222,7 +222,6 @@ public:
 		matrix = tmp;
 		save();
 	}
-	
 	void depthFirstSearch(int v, std::vector<int> &wek)
 	{
 		vertexInGraph[v].visited = true;
@@ -233,8 +232,31 @@ public:
 				depthFirstSearch(vertexInGraph[v].edges[i].number, wek);
 		}
 	}
+	void breadthFirstSearch(int v, std::vector<int> &wek)
+	{
+		resetVisited();
+		std::list<int> list;
+		vertexInGraph[v].visited = true;
+		list.push_back(v);
 
+		while (!list.empty())
+		{
+			v = list.front();
+			wek.push_back(v);
+			list.pop_front();
+			for(int i=0; i<vertexInGraph[v].edges.size();i++)
+			{
+				if(!vertexInGraph[vertexInGraph[v].edges[i].number].visited)
+				{
+					vertexInGraph[vertexInGraph[v].edges[i].number].visited = true;
+					list.push_back(findVertex(vertexInGraph[vertexInGraph[v].edges[i].number].name));
+				}
+			}
+		}
+	}
+	
 #pragma region private
+
 	std::vector<vertex> vertexInGraph;
 	std::vector<std::vector<bool>> matrix;
 	bool isUnoriented;

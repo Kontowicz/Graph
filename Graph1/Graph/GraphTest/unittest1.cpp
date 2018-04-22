@@ -455,5 +455,107 @@ namespace GraphTest
 			};
 			Assert::IsTrue(g.matrix == tmp);
 		}
+
+		TEST_METHOD(dfs)
+		{
+			graph g;
+			for(int i=0; i<6; i++)
+				g.addVertex(std::to_string(i));
+
+			g.connectOriented("0", "1");
+			g.connectOriented("0", "5");
+
+			g.connectOriented("2", "3");
+			g.connectOriented("2", "1");
+
+			g.connectOriented("3", "4");
+
+			g.connectOriented("4", "1");
+			g.connectOriented("4", "5");
+
+			g.connectOriented("5", "1");
+			g.connectOriented("5", "2");
+			g.resetVisited();
+			const std::vector<int> tmp{0,1,5,2,3,4};
+			std::vector<int> result;
+			g.depthFirstSearch(0, result);
+			Assert::IsTrue(tmp == result);
+		}
+
+		TEST_METHOD(square)
+		{
+			graph g;
+			for (int i = 0; i<7; i++)
+				g.addVertex(std::to_string(i));
+
+			g.connectOriented("0", "3");
+
+			g.connectOriented("1", "0");
+			g.connectOriented("1", "5");
+
+			g.connectOriented("5", "2");
+			g.connectOriented("5", "4");
+			g.connectOriented("5", "6");
+
+			g.connectOriented("6", "0");
+
+			g.graphSquare();
+
+			const std::vector<std::vector<bool>> tmp{
+			{0,0,0,1,0,0,0},
+			{1,0,1,1,1,1,1},
+			{0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0},
+			{1,0,1,0,1,0,1},
+			{1,0,0,1,0,0,0}
+			};
+			Assert::IsTrue(tmp == g.matrix);
+		}
+		
+		TEST_METHOD(BFS)
+		{
+			graph g; 
+
+			for (int i = 0; i < 14; i++)
+				g.addVertex(std::to_string(i));
+
+			g.connectOriented("0", "1");
+			g.connectOriented("0", "8");
+			g.connectOriented("0", "2");
+
+			g.connectOriented("1", "7");
+			g.connectOriented("1", "5");
+			g.connectOriented("1", "4");
+
+			g.connectOriented("2", "9");
+
+			g.connectOriented("3", "0");
+			g.connectOriented("3", "10");
+			g.connectOriented("3", "11");
+
+			g.connectOriented("4", "13");
+
+			g.connectOriented("5", "6");
+			g.connectOriented("5", "7");
+			g.connectOriented("5", "13");
+
+			g.connectOriented("7", "8");
+
+			g.connectOriented("8", "9");
+
+			g.connectOriented("10", "9");
+			g.connectOriented("10", "11");
+
+			g.connectOriented("12", "0");
+			g.connectOriented("12", "3");
+
+			g.connectOriented("13", "12");
+			g.resetVisited();
+			const std::vector<int> tmp{ 0,1,8,2,7,5,4,9,6,13,12,3,10,11 };
+			std::vector<int> result;
+			g.breadthFirstSearch(0, result);
+			Assert::IsTrue(tmp == result);
+		}
 	};
 }

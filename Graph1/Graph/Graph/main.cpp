@@ -64,6 +64,17 @@ int getDataInt(int min, int max)
 	return toReturn;
 }
 
+void printVector(std::vector<int>&wek)
+{
+	for (int i = 0; i < wek.size(); ++i)
+	{
+		if (i + 1 % 10 == 0)
+			std::cout << "\n";
+
+		std::cout << wek[i] << " ";
+	}
+}
+
 void wait()
 {
 	std::cout << "\nPress enter to continue...";
@@ -93,6 +104,8 @@ int main()
 		std::cout << "13. Graph transposition\n";
 		std::cout << "14. Print matrix\n";
 		std::cout << "15. DFS\n";
+		std::cout << "16. Graph square\n";
+		std::cout << "17. BFS\n";
 
 #pragma endregion 
 		s = getDataInt();
@@ -250,6 +263,7 @@ int main()
 			case 15:
 			{
 				std::vector<int> tmp;
+				graph.resetVisited();
 				std::cout << "Enter start vertex name: ";
 				int pos = graph.findVertex(getDataString());
 				while (pos<0 || pos>graph.matrix.size())
@@ -258,15 +272,29 @@ int main()
 				}
 				graph.depthFirstSearch(pos, tmp);
 				std::cout << "DFS:\n";
-				for (int i = 0; i < tmp.size(); ++i)
-				{
-					if (i + 1 % 10 == 0)
-						std::cout << "\n";
-
-					std::cout << tmp[i] << " ";
-				}
+				printVector(tmp);
 				break;
 			}
+			case 16:
+			{
+				graph.graphSquare();
+				break;
+			}
+			case 17:
+			{
+				std::cout << "Enter start vertex name: ";
+				int pos = graph.findVertex(getDataString());
+				while (pos<0 || pos>graph.vertexInGraph.size())
+				{
+					pos = graph.findVertex(getDataString());
+				}
+				std::vector<int> tmp;
+				graph.breadthFirstSearch(pos, tmp);
+				std::cout << "BFS:\n";
+				printVector(tmp);
+				break;
+			}
+			
 			default:
 			{
 				std::cout << "Error";
